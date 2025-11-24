@@ -67,7 +67,7 @@ def main():
     
     # 动态导入（在依赖检查后）
     try:
-        from src.qacg_generator import QACGGenerator
+        from src.generation.qacg import QACGGenerator
     except ImportError as e:
         print(f"❌ 导入错误: {e}")
         print("请确保所有依赖已正确安装:")

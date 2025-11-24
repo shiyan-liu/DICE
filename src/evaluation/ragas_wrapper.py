@@ -14,10 +14,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import numpy as np
 
 # 导入RAGAS评估器
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent.parent))
-from ragas_evaluator import RagasEvaluator, RagasConfig
+from src.utils.ragas_impl import RagasEvaluator, RagasConfig
 
 
 @dataclass

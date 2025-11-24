@@ -37,4 +37,3 @@ If you use DICE in your work, please cite:
   booktitle={Socially Responsible and Trustworthy Foundation Models at NeurIPS 2025}
 }
 ```
-

@@ -11,7 +11,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
-from src.dice.dice_simplified import SimplifiedDICEEvaluator, SimplifiedDICEConfig
+from src.evaluation.dice_engine import SimplifiedDICEEvaluator, SimplifiedDICEConfig
 
 
 def log_and_print(message):

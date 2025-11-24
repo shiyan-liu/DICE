@@ -17,7 +17,8 @@ import concurrent.futures
 import threading
 
 # 导入本地判决器
-from .local_pairwise_judge import LocalPairwiseJudge
+from .llm_judge import LocalPairwiseJudge
+from .llm_judge import LocalPairwiseJudge as PairwiseJudge
 
 # 添加tqdm进度条支持
 try:
@@ -63,7 +64,7 @@ try:
 except ImportError:
     SKLEARN_AVAILABLE = False
 
-from .local_pairwise_judge import LocalPairwiseJudge as PairwiseJudge
+from .llm_judge import LocalPairwiseJudge as PairwiseJudge
 
 
 @dataclass

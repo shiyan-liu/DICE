@@ -28,7 +28,7 @@ from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core.storage.storage_context import StorageContext
 import chromadb
 
-from .base_rag import BaseRAGSystem, RAGConfig, RetrievalResult, RAGResponse
+from .base import BaseRAGSystem, RAGConfig, RetrievalResult, RAGResponse
 
 
 class LlamaIndexRAGSystem(BaseRAGSystem):

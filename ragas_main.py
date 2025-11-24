@@ -16,7 +16,7 @@ from typing import List, Dict, Any
 # 添加项目根目录到Python路径
 sys.path.append(str(Path(__file__).parent))
 
-from src.ragas.ragas_dice_core import RagasDiceEvaluator, RagasDiceConfig
+from src.evaluation.ragas_wrapper import RagasDiceEvaluator, RagasDiceConfig
 
 
 def log_and_print(message):

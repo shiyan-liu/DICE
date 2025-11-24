@@ -14,8 +14,8 @@ import pandas as pd
 from llama_index.llms.ollama import Ollama
 from llama_index.llms.openai import OpenAI
 
-from .rag_systems.llamaindex_rag import LlamaIndexRAGSystem
-from .rag_systems.base_rag import RAGConfig
+from src.systems.llamaindex_impl import LlamaIndexRAGSystem
+from src.systems.base import RAGConfig
 
 
 class QACGGenerator:
