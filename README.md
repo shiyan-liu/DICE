@@ -8,48 +8,86 @@ This repository implements **DICE** (Discrete Interpretable Comparative Evaluati
 
 ## Features
 
-- Evidence-coupled reasoning for transparent decision-making  
-- Probabilistic $\{A, B, Tie\}$ scoring for confidence-aware judgments  
-- Efficient large-scale evaluation with Swiss-system tournament  
-- Reproducible benchmarks for multi-system comparisons  
+- Evidence-coupled reasoning for transparent decision-making
+- Probabilistic $\{A, B, Tie\}$ scoring for confidence-aware judgments
+- Efficient large-scale evaluation with Swiss-system tournament
+- Reproducible benchmarks for multi-system comparisons
 
-## Usage
+## Installation
 
-1. Clone the repository:  
+1. Clone the repository:
    ```bash
    git clone https://github.com/shiyan-liu/DICE.git
    cd DICE
    ```
-2. Install dependencies:  
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. **Run evaluation**:
 
-   **Generate QACG data** (Question, Answer, Context, Groundtruth):
-   ```bash
-   python src/scripts/generate_data.py --num_questions 20
-   ```
+## Usage
 
-   **Run DICE Evaluation** (Tournament Mode):
-   ```bash
-   python src/scripts/run_dice.py --scenario tournament
-   ```
+### 1. Prepare Your Data
 
-   **Run DICE Evaluation** (Baseline Comparison):
-   ```bash
-   python src/scripts/run_dice.py --scenario baseline --target_system bge-large-zh_chunk_256_qwen2.5
-   ```
+To evaluate your own RAG systems, save your generation results in JSON files with the prefix `qacg_` (e.g., `qacg_system_a.json`).
 
-   **Run RAGAS Evaluation**:
-   ```bash
-   python src/scripts/run_ragas.py --input_dir qacg_output --output_dir ragas_dice_output
-   ```
+Required JSON format for each system:
 
-   **Validate Evaluation Accuracy** (requires human annotation):
-   ```bash
-   python src/scripts/validate_dice.py --qacg_files qacg_output/qacg_system_A.json qacg_output/qacg_system_B.json
-   ```
+```json
+[
+  {
+    "question": "What is the capital of France?",
+    "rag_answer": "The capital is Paris.",
+    "context": ["Paris is the capital and most populous city of France."],
+    "groundtruth": "Paris"
+  },
+  ...
+]
+```
+
+Place these files in a directory (e.g., `my_systems/`).
+
+### 2. Run Evaluation
+
+#### Scenario A: Compare Multiple Systems (Tournament)
+
+If you have 4 or more systems to compare, use the tournament mode. This runs a Swiss-system tournament to efficiently rank your systems.
+
+```bash
+python src/scripts/run_dice.py --scenario tournament --input_dir my_systems/
+```
+
+#### Scenario B: Evaluate a Single System (Baseline Comparison)
+
+If you have a single system (or fewer than 4) and want to evaluate its absolute quality, compare it against built-in baselines (Good, Medium, Bad).
+
+```bash
+python src/scripts/run_dice.py --scenario baseline --target_file my_systems/qacg_my_system.json --target_system MySystemName
+```
+
+#### Scenario C: Compare All Pairs (Round Robin)
+
+For a comprehensive comparison of all systems against each other (N*N), use the allpairs mode. Note that this requires more API calls.
+
+```bash
+python src/scripts/run_dice.py --scenario allpairs --input_dir my_systems/
+```
+
+### 3. Generate Synthetic Data (Optional)
+
+If you don't have RAG outputs yet, you can generate benchmark data using our provided knowledge base in `dataset/`.
+
+```bash
+python src/scripts/generate_data.py --num_questions 20 --output_dir my_systems
+```
+
+### 4. Run RAGAS Evaluation (Optional)
+
+To run standard RAGAS metrics alongside DICE:
+
+```bash
+python src/scripts/run_ragas.py --input_dir my_systems/ --output_dir ragas_results
+```
 
 ## Reference
 

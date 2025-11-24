@@ -151,7 +151,7 @@ class QACGGenerator:
         else:
             return "根据文本内容，主要讲述了什么？"
     
-    def load_test_questions(self, qa_file_path: str = "dice/70条测试数据QA.txt") -> List[Dict[str, Any]]:
+    def load_test_questions(self, qa_file_path: str = "dataset/70条测试数据QA.txt") -> List[Dict[str, Any]]:
         """
         加载给定的70条测试数据
         

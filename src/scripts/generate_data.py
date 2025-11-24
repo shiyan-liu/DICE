@@ -77,7 +77,7 @@ def main():
     parser.add_argument(
         '--jsonl_path', 
         type=str, 
-        default='dice/知识源.jsonl',
+        default='dataset/知识源.jsonl',
         help='知识库JSONL文件路径'
     )
     parser.add_argument(
